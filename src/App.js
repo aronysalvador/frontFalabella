@@ -2,8 +2,8 @@ import React, {useState } from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { TextField, Typography, Button } from "@material-ui/core";
 import { getComunStyle } from "./css/comun";
-import { getArrayTest } from "./redux/actions/testOneAction";
-import { getArrayTest2, getArrayTest3 } from "./redux/actions/testSecondAction"
+import { getArrayTest, updateForm2 } from "./redux/actions/testOneAction";
+import { getArrayTest2, getArrayTest3, updateForm } from "./redux/actions/testSecondAction"
 import './App.css';
 
 const App = () => {
@@ -27,7 +27,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <body className="App-header">
+      <div className="App-header">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
@@ -92,6 +92,7 @@ const App = () => {
                       disabled={!arrayInitial}
                       onClick={() => {
                         setArrayInitial("")
+                        dispatch(updateForm2("arrayFinal" , "" ))
                       }}
                     >
                       Clear
@@ -104,9 +105,7 @@ const App = () => {
                   </Typography>
                   <br/>
                   <br/>
-                  {arrayFinal && arrayFinal?.map((item,index) => {
-                      return  `${item},`
-                  })}
+                  {arrayFinal &&  <Typography style={{height:"auto", display:"block", overflow:"auto"}}>{arrayFinal.toString()}</Typography>}
             </div>
           </div>        
           <br/>
@@ -123,7 +122,7 @@ const App = () => {
                 <div className="col-md-12">
                   <Typography >                   
                     Enter number
-                  </Typography>
+                  </Typography>   
                   <TextField
                       id="number2"
                       type="number"
@@ -153,21 +152,19 @@ const App = () => {
                       disabled={!number2}
                       onClick={() => {
                         setNumber2("")
+                        dispatch(updateForm("arrayFinalSecond" , "" ))
                       }}
                     >
                       Clear
                     </Button>
                 </div>
             </div>
-            <div className="col-md-5" style={{textAlign:"left" , backgroundColor: "#9fbcc7", border:" 2px solid #f9fafb", padding: "10px",borderRadius: "25px", marginLeft: "10px"}}>
+            <div className="col-md-5" style={{textAlign:"left" , backgroundColor: "#9fbcc7", border:" 2px solid #f9fafb", padding: "10px",borderRadius: "25px", marginLeft: "10px" ,wordWrap:"break word"}}>
                   <Typography >
                       Data output
                   </Typography>
                   <br/>
-                  <br/>
-                  {arrayFinalSecond && arrayFinalSecond?.map((item,index) => {
-                      return  `${item},`
-                  })}
+                  {arrayFinalSecond && <Typography style={{height:"auto", display:"block", overflow:"auto"}}>{arrayFinalSecond.toString()}</Typography>}
             </div>
           </div>  
           
@@ -185,6 +182,9 @@ const App = () => {
                 <div className="col-md-12">
                   <Typography >                   
                     Enter number
+                  </Typography>
+                  <Typography >                   
+                  The number less than or equal to <b>1000000</b> with the longest length in Collatz's conjecture is: <b>837799</b>. Check it here
                   </Typography>
                   <TextField
                       id="number3"
@@ -207,7 +207,7 @@ const App = () => {
                         dispatch(getArrayTest3(number3));                       
                       }}
                     >
-                      Get array
+                      Get length
                     </Button>
                     <Button
                       variant="contained"
@@ -215,6 +215,7 @@ const App = () => {
                       disabled={!number3}
                       onClick={() => {
                         setNumber3("")
+                        dispatch(updateForm("objectoFinal" , "" ))
                       }}
                     >
                       Clear
@@ -227,11 +228,11 @@ const App = () => {
                   </Typography>
                   <br/>
                   <br/>
-                  {objectoFinal && `The longest sequence of the Collatz Conjecture up to the number ${number3} is ${objectoFinal[0]} with a logintud of ${objectoFinal[1]}`}
+                  {objectoFinal && <Typography >The longest sequence of the Collatz Conjecture up to the number <b>{number3}</b> is <b>{objectoFinal[0]}</b> with a logintud of <b>{objectoFinal[1]}</b> </Typography>}
             </div>
           </div>  
         </div>
-      </body>
+      </div>
     </div>
   );
 }

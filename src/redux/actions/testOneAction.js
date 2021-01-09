@@ -24,7 +24,7 @@ getData(objeto)
     .then((response) => {
         if(response.data.status === 200 || response.data.status === 304){
             dispatch(successCall(response.data.content[0]));
-            dispatch(updateForm("arrayFinal" , response.data.content[0] ))
+            dispatch(updateForm2("arrayFinal" , response.data.content[0] ))
         }else{
             console.log('Ha ocurrido un error')
         }
@@ -43,7 +43,7 @@ const errorCall = () => ({
 });
 };
 
-export const updateForm = (stateType, value) => {
+export const updateForm2 = (stateType, value) => {
     return {
         type: UPDATE_FORM,
         payload: {
